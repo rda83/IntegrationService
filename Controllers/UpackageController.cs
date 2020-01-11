@@ -29,12 +29,16 @@ namespace IntegrationService.Controllers
         public async Task<ActionResult<Upackage>> PostUpackage(CreateUpackageViewModel viewModel)
         {
 
-           var upackage = new Upackage();
+            RouteMap routeMap = _context.RouteMap
+                    .Where(b => b.IntegrationId == viewModel.IntegrationId)
+                    .FirstOrDefault();
 
-           upackage.Data            = viewModel.Data;
-           upackage.Date            = DateTime.UtcNow;
-           upackage.IntegrationId   = viewModel.IntegrationId;
-           upackage.SystemId        = "d1a40efc-0688-4320-9d7f-e5eb96ef08a1";
+            var upackage = new Upackage();
+
+            upackage.Data            = viewModel.Data;
+            upackage.Date            = DateTime.UtcNow;
+            upackage.IntegrationId   = viewModel.IntegrationId;
+            upackage.SystemId        = routeMap.SystemId;
 
             _context.Upackages.Add(upackage);
             await _context.SaveChangesAsync();

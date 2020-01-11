@@ -29,8 +29,10 @@ namespace IntegrationService
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<UpackageContext>(opt =>
-               opt.UseInMemoryDatabase("IntegrationServiceDB"));
+            string conString = Configuration.GetConnectionString("DatabaseSQLServer");
+            
+            services.AddDbContext<ISContext>(opt =>
+               opt.UseSqlServer(conString));
 
             services.AddControllers();
         }

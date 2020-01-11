@@ -15,9 +15,9 @@ namespace IntegrationService.Controllers
     [ApiController]
     public class UpackageController : ControllerBase
     {
-        private readonly UpackageContext _context;
+        private readonly ISContext _context;
 
-        public UpackageController(UpackageContext context)
+        public UpackageController(ISContext context)
         {
             _context = context;
         }

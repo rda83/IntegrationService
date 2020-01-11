@@ -1,0 +1,110 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using IntegrationService.Data;
+using IntegrationService.Models;
+
+namespace IntegrationService.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UpackageController : ControllerBase
+    {
+        private readonly UpackageContext _context;
+
+        public UpackageController(UpackageContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Upackage
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Upackage>>> GetUpackages()
+        {
+            return await _context.Upackages.ToListAsync();
+        }
+
+        // GET: api/Upackage/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Upackage>> GetUpackage(long id)
+        {
+            var upackage = await _context.Upackages.FindAsync(id);
+
+            if (upackage == null)
+            {
+                return NotFound();
+            }
+
+            return upackage;
+        }
+
+        // PUT: api/Upackage/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUpackage(long id, Upackage upackage)
+        {
+            if (id != upackage.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(upackage).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UpackageExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/Upackage
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        public async Task<ActionResult<Upackage>> PostUpackage(Upackage upackage)
+        {
+            _context.Upackages.Add(upackage);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUpackage", new { id = upackage.Id }, upackage);
+        }
+
+        // DELETE: api/Upackage/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Upackage>> DeleteUpackage(long id)
+        {
+            var upackage = await _context.Upackages.FindAsync(id);
+            if (upackage == null)
+            {
+                return NotFound();
+            }
+
+            _context.Upackages.Remove(upackage);
+            await _context.SaveChangesAsync();
+
+            return upackage;
+        }
+
+        private bool UpackageExists(long id)
+        {
+            return _context.Upackages.Any(e => e.Id == id);
+        }
+    }
+}

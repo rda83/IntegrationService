@@ -4,14 +4,16 @@ using IntegrationService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IntegrationService.Migrations
 {
     [DbContext(typeof(ISContext))]
-    partial class ISContextModelSnapshot : ModelSnapshot
+    [Migration("20200122132510_Statuses")]
+    partial class Statuses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,50 +79,6 @@ namespace IntegrationService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Upackages");
-                });
-
-            modelBuilder.Entity("IntegrationService.Models.UpackageStatus", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("StatusId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("UpackageId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StatusId");
-
-                    b.HasIndex("UpackageId");
-
-                    b.ToTable("UpackageStatuses");
-                });
-
-            modelBuilder.Entity("IntegrationService.Models.UpackageStatus", b =>
-                {
-                    b.HasOne("IntegrationService.Models.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IntegrationService.Models.Upackage", "Upackage")
-                        .WithMany("UpackageStatuses")
-                        .HasForeignKey("UpackageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

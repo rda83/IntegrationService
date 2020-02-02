@@ -12,6 +12,8 @@ namespace IntegrationService.Data
 
         public DbSet<Upackage> Upackages { get; set; }
         public DbSet<RouteMap> RouteMap { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<UpackageStatus> UpackageStatuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

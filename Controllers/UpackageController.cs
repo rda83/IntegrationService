@@ -26,11 +26,15 @@ namespace IntegrationService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Upackage>> PostUpackage(CreateUpackageViewModel viewModel)
+        public async Task<ActionResult<ResponseUpackageViewModel>> PostUpackage(CreateUpackageViewModel viewModel)
         {
 
             RouteMap routeMap = _context.RouteMap
                     .Where(b => b.IntegrationId == viewModel.IntegrationId)
+                    .FirstOrDefault();
+
+            Status status = _context.Statuses
+                    .Where(b => b.Id == 1)
                     .FirstOrDefault();
 
             var upackage = new Upackage();
@@ -40,10 +44,21 @@ namespace IntegrationService.Controllers
             upackage.IntegrationId   = viewModel.IntegrationId;
             upackage.SystemId        = routeMap.SystemId;
 
+            var upackageStatus      = new UpackageStatus();
+            upackageStatus.Date     = DateTime.UtcNow;
+            upackageStatus.Status   = status;
+            upackageStatus.Upackage = upackage;
+            upackageStatus.Message  = "{}";
+            
+
             _context.Upackages.Add(upackage);
+            _context.UpackageStatuses.Add(upackageStatus);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUpackage", new { id = upackage.Id }, upackage);
+            var responseUpackageViewModel = new ResponseUpackageViewModel();
+            responseUpackageViewModel.RequestId = upackage.Id; 
+            return CreatedAtAction("GetUpackage", new { id = upackage.Id }, responseUpackageViewModel);
         }
 
 

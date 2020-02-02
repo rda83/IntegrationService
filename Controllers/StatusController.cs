@@ -12,48 +12,48 @@ namespace IntegrationService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UpackageController : ControllerBase
+    public class StatusController : ControllerBase
     {
-        private readonly UpackageContext _context;
+        private readonly ISContext _context;
 
-        public UpackageController(UpackageContext context)
+        public StatusController(ISContext context)
         {
             _context = context;
         }
 
-        // GET: api/Upackage
+        // GET: api/Status
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Upackage>>> GetUpackages()
+        public async Task<ActionResult<IEnumerable<Status>>> GetStatuses()
         {
-            return await _context.Upackages.ToListAsync();
+            return await _context.Statuses.ToListAsync();
         }
 
-        // GET: api/Upackage/5
+        // GET: api/Status/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Upackage>> GetUpackage(long id)
+        public async Task<ActionResult<Status>> GetStatus(long id)
         {
-            var upackage = await _context.Upackages.FindAsync(id);
+            var status = await _context.Statuses.FindAsync(id);
 
-            if (upackage == null)
+            if (status == null)
             {
                 return NotFound();
             }
 
-            return upackage;
+            return status;
         }
 
-        // PUT: api/Upackage/5
+        // PUT: api/Status/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUpackage(long id, Upackage upackage)
+        public async Task<IActionResult> PutStatus(long id, Status status)
         {
-            if (id != upackage.Id)
+            if (id != status.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(upackage).State = EntityState.Modified;
+            _context.Entry(status).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace IntegrationService.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UpackageExists(id))
+                if (!StatusExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace IntegrationService.Controllers
             return NoContent();
         }
 
-        // POST: api/Upackage
+        // POST: api/Status
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Upackage>> PostUpackage(Upackage upackage)
+        public async Task<ActionResult<Status>> PostStatus(Status status)
         {
-            _context.Upackages.Add(upackage);
+            _context.Statuses.Add(status);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUpackage", new { id = upackage.Id }, upackage);
+            return CreatedAtAction("GetStatus", new { id = status.Id }, status);
         }
 
-        // DELETE: api/Upackage/5
+        // DELETE: api/Status/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Upackage>> DeleteUpackage(long id)
+        public async Task<ActionResult<Status>> DeleteStatus(long id)
         {
-            var upackage = await _context.Upackages.FindAsync(id);
-            if (upackage == null)
+            var status = await _context.Statuses.FindAsync(id);
+            if (status == null)
             {
                 return NotFound();
             }
 
-            _context.Upackages.Remove(upackage);
+            _context.Statuses.Remove(status);
             await _context.SaveChangesAsync();
 
-            return upackage;
+            return status;
         }
 
-        private bool UpackageExists(long id)
+        private bool StatusExists(long id)
         {
-            return _context.Upackages.Any(e => e.Id == id);
+            return _context.Statuses.Any(e => e.Id == id);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace IntegrationService.Models
 {
@@ -18,5 +19,7 @@ namespace IntegrationService.Models
 
         [Required]
         public DateTime Date  { get; set; }
+
+        public List<UpackageStatus> UpackageStatuses { get; set; }
     }
 }

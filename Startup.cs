@@ -29,10 +29,15 @@ namespace IntegrationService
         public void ConfigureServices(IServiceCollection services)
         {
 
-            string conString = Configuration.GetConnectionString("DatabaseSQLServer");
+            //string conString = Configuration.GetConnectionString("DatabaseSQLServer");
+            string conString = Configuration.GetConnectionString("DatabasePGServer");
             
+            /*
             services.AddDbContext<ISContext>(opt =>
                opt.UseSqlServer(conString));
+            */
+            services.AddDbContext<ISContext>(opt =>
+                opt.UseNpgsql(conString));
 
             services.AddControllers();
         }

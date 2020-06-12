@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using IntegrationService.Data;
 using IntegrationService.Models;
 using IntegrationService.Models.UpackageViewModel;
+using IntegrationService.RabbitMQ;
 
 namespace IntegrationService.Controllers
 {
@@ -23,8 +24,6 @@ namespace IntegrationService.Controllers
         }
 
         // POST: api/Upackage
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<ResponseUpackageViewModel>> PostUpackage(CreateUpackageViewModel viewModel)
         {
@@ -56,6 +55,11 @@ namespace IntegrationService.Controllers
 
             await _context.SaveChangesAsync();
 
+            // Запись сообщения в очередь
+            RabbitMQDirectClient client = new RabbitMQDirectClient();
+            client.Send(routeMap.SystemId, viewModel.Data);
+            
+
             var responseUpackageViewModel = new ResponseUpackageViewModel();
             responseUpackageViewModel.RequestId = upackage.Id; 
             return CreatedAtAction("GetUpackage", new { id = upackage.Id }, responseUpackageViewModel);
@@ -64,17 +68,30 @@ namespace IntegrationService.Controllers
 
         // GET: api/Upackage/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Upackage>> GetUpackage(long id)
+        public async Task<ActionResult<UpackageCurrentStatusViewModel>> GetUpackage(long id)
         {
-            var upackage = await _context.Upackages.FindAsync(id);
+            //var upackage = await _context.Upackages.FindAsync(id);
 
-            if (upackage == null)
+            var currentStatus = _context.UpackageStatuses
+                .Include(b => b.Status)
+                .Where(b => b.UpackageId == id)
+                .OrderByDescending(b => b.Date)
+                .FirstOrDefault();
+
+            if (currentStatus == null)
             {
                 return NotFound();
             }
 
-            return upackage;
-        }
+            var currentStatusView = new UpackageCurrentStatusViewModel();
 
+            currentStatusView.UpackageId = id;
+            currentStatusView.Date = currentStatus.Date;
+            currentStatusView.StatusId = currentStatus.Status.Id;
+            currentStatusView.Presentation = currentStatus.Status.Presentation;
+            currentStatusView.Message = currentStatus.Message;
+
+            return currentStatusView;
+        }
     }
 }

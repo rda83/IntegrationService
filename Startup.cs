@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using IntegrationService.Models;
 using IntegrationService.Data;
+using IntegrationService.Service;
 
 namespace IntegrationService
 {
@@ -38,6 +39,8 @@ namespace IntegrationService
             */
             services.AddDbContext<ISContext>(opt =>
                 opt.UseNpgsql(conString));
+
+            services.AddHostedService<UpackageStatusesHandler>();
 
             services.AddControllers();
         }

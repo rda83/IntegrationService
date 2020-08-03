@@ -40,7 +40,7 @@ namespace IntegrationService
             services.AddDbContext<ISContext>(opt =>
                 opt.UseNpgsql(conString));
 
-            services.AddHostedService<UpackageStatusesHandler>();
+            services.AddHostedService<ConsumeRabbitMQHostedService>();
 
             services.AddControllers();
         }

@@ -2,7 +2,7 @@ using System;
 using RabbitMQ.Client;
 using System.Text;
 using RabbitMQ.Client.Events;
-using RabbitMQ.Client.MessagePatterns;
+//using RabbitMQ.Client.MessagePatterns;
 
 namespace IntegrationService.RabbitMQ
 {
@@ -57,6 +57,7 @@ namespace IntegrationService.RabbitMQ
 
         public void Receive()
         {
+            /*
             try
             {
                 var connectionFactory = new ConnectionFactory()
@@ -102,6 +103,7 @@ namespace IntegrationService.RabbitMQ
             {
 
             }
+            */
         }
     }
 }

@@ -31,7 +31,7 @@ namespace IntegrationService.Service
         private void InitRabbitMQ()  
         {  
             var factory = new ConnectionFactory   {
-                    HostName = "192.168.0.9",
+                    HostName = "192.168.0.12",
                     UserName = "guest",
                     Password = "guest",
                     Port = 5672,

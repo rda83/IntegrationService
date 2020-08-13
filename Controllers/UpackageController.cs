@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IntegrationService.Data;
 using IntegrationService.Models;
 using IntegrationService.Models.UpackageViewModel;
-using IntegrationService.RabbitMQ;
+using IntegrationService.Service.ReceivingSystem;
 
 namespace IntegrationService.Controllers
 {
@@ -17,10 +15,12 @@ namespace IntegrationService.Controllers
     public class UpackageController : ControllerBase
     {
         private readonly ISContext _context;
+        private readonly IReceivingSystem _receivingSystem;
 
-        public UpackageController(ISContext context)
+        public UpackageController(ISContext context, IReceivingSystem receivingSystem)
         {
             _context = context;
+            _receivingSystem = receivingSystem;
         }
 
         // POST: api/Upackage
@@ -55,10 +55,7 @@ namespace IntegrationService.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Запись сообщения в очередь
-            RabbitMQDirectClient client = new RabbitMQDirectClient();
-            client.Send(routeMap.SystemId, viewModel.Data);
-            
+            _receivingSystem.Send(routeMap.SystemId, viewModel.Data);
 
             var responseUpackageViewModel = new ResponseUpackageViewModel();
             responseUpackageViewModel.RequestId = upackage.Id; 

@@ -82,13 +82,11 @@ namespace IntegrationService.Service
             _channel.BasicConsume("1c.IS.Response", false, consumer);  
             return Task.CompletedTask;  
         }  
-
-
         private void HandleMessage(string content)  
         {  
             
             // {"Date": "2021-08-01T00:00:00-07:00", "StatusId": 2, "UpackageId": 20, "Message": "Пакет успешно обработан"}
-            InputStatus inputStatus = JsonSerializer.Deserialize<InputStatus>(content);
+            InputStatusViewModel inputStatus = JsonSerializer.Deserialize<InputStatusViewModel>(content);
             
             using (var scope = _scopeFactory.CreateScope())
             {
@@ -102,11 +100,7 @@ namespace IntegrationService.Service
                                         .Where(b => b.Id == inputStatus.UpackageId)
                                         .FirstOrDefault();
                 
-                var upackageStatus      = new UpackageStatus();
-                upackageStatus.Date     = inputStatus.Date;
-                upackageStatus.Status   = status;
-                upackageStatus.Upackage = upackage;
-                upackageStatus.Message  = inputStatus.Message;        
+                var upackageStatus = new UpackageStatus(inputStatus.Date, status, upackage, inputStatus.Message);
 
                 dbContext.UpackageStatuses.Add(upackageStatus);
                 dbContext.SaveChanges();
@@ -119,13 +113,12 @@ namespace IntegrationService.Service
         private void OnConsumerRegistered(object sender, ConsumerEventArgs e) {  }  
         private void OnConsumerShutdown(object sender, ShutdownEventArgs e) {  }  
         private void RabbitMQ_ConnectionShutdown(object sender, ShutdownEventArgs e)  {  }  
-    
+ 
         public override void Dispose()  
         {  
             _channel.Close();  
             _connection.Close();  
             base.Dispose();  
         }  
-
     }
 }

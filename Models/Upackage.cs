@@ -21,5 +21,15 @@ namespace IntegrationService.Models
         public DateTime Date  { get; set; }
 
         public List<UpackageStatus> UpackageStatuses { get; set; }
+
+        public Upackage(){}
+
+        public Upackage(string data, DateTime date, string integrationId, string systemId)
+        {
+            Data            = data;
+            Date            = date;
+            IntegrationId   = integrationId;
+            SystemId        = systemId;
+        }
     }
 }

@@ -1,4 +1,4 @@
-namespace IntegrationService.Service.ReceivingSystem
+namespace IntegrationService.Service.Infrastructure.ReceivingSystem
 {
     public interface IReceivingSystem
     {

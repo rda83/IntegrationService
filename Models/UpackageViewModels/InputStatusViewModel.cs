@@ -3,7 +3,7 @@ using System;
 
 namespace IntegrationService.Models
 {
-    public class InputStatus
+    public class InputStatusViewModel
     {
         [Required]
         public DateTime Date { get; set; }

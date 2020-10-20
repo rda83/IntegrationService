@@ -20,5 +20,14 @@ namespace IntegrationService.Models.UpackageViewModel
         [Required]
         public string Message { get; set; }
 
+        public UpackageCurrentStatusViewModel(){}
+        public UpackageCurrentStatusViewModel(long id, DateTime date, long statusId, string presentation, string message)
+        {    
+            UpackageId = id;
+            Date = date;
+            StatusId = statusId;
+            Presentation = presentation;
+            Message = message; 
+        }
     }
 }

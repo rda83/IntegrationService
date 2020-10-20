@@ -21,5 +21,15 @@ namespace IntegrationService.Models
 
         [Required]
         public long UpackageId{ get; set; }
+
+        public UpackageStatus(){}
+
+        public UpackageStatus(DateTime date, Status status, Upackage upackage, string message)
+        {
+            Date = date;
+            Status = status;
+            Upackage = upackage;
+            Message = message;
+        }
     }
 }

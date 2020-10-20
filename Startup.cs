@@ -6,8 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using IntegrationService.Data;
 using IntegrationService.Service;
-using IntegrationService.Service.ReceivingSystem;
-
+using IntegrationService.Service.Infrastructure.ReceivingSystem;
+using IntegrationService.Models.Repositories;
+using IntegrationService.Service.Infrastructure.Repositories;
 
 namespace IntegrationService
 {
@@ -35,8 +36,12 @@ namespace IntegrationService
                 opt.UseNpgsql(conString));
 
             services.AddHostedService<ConsumeRabbitMQHostedService>();
-            services.AddSingleton<IReceivingSystem, RabbitMQReceivingSystem>();
-
+            services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IReceivingSystem, RabbitMQReceivingSystem>();
+            services.AddTransient<IRouteMapRepository, RouteMapRepository>();
+            services.AddTransient<IStatusRepository, StatusRepository>();
+            services.AddTransient<IUpackageStatusRepository, UpackageStatusRepository>();
+            
             services.AddControllers();
         }
 

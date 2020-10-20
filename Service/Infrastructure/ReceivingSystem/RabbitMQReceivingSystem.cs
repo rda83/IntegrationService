@@ -4,15 +4,13 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 
 
-namespace IntegrationService.Service.ReceivingSystem
+namespace IntegrationService.Service.Infrastructure.ReceivingSystem
 {
     public class RabbitMQReceivingSystem: IReceivingSystem
     {
 
         private readonly IConfiguration _configuration;
         private ConnectionFactory connectionFactory;
-
-
         public RabbitMQReceivingSystem(IConfiguration configuration)
         {
             _configuration = configuration;

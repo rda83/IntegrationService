@@ -28,9 +28,10 @@ namespace IntegrationService.Controllers
             var currentStatusView = _messageService.GetUpackageLastStatus(id);
             if (currentStatusView == null)
             {
-                return NotFound();            }
-            //return currentStatusView;
-            return NotFound();
+                return NotFound();
+            }
+            
+            return currentStatusView;
         }
     }
 }

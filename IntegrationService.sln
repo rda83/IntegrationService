@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationService.api", "IntegrationService.api\IntegrationService.api.csproj", "{1E6E2BB6-B9D3-44BA-BCFA-23E40096F850}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B2BF2981-E139-41DB-8382-8770EDA1B3ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationService.Data", "lib\IntegrationService.DataBase\IntegrationService.Data.csproj", "{83B8B195-FE4F-47E9-862B-22ADA5B543DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E6E2BB6-B9D3-44BA-BCFA-23E40096F850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6E2BB6-B9D3-44BA-BCFA-23E40096F850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6E2BB6-B9D3-44BA-BCFA-23E40096F850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6E2BB6-B9D3-44BA-BCFA-23E40096F850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83B8B195-FE4F-47E9-862B-22ADA5B543DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B8B195-FE4F-47E9-862B-22ADA5B543DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B8B195-FE4F-47E9-862B-22ADA5B543DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B8B195-FE4F-47E9-862B-22ADA5B543DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{83B8B195-FE4F-47E9-862B-22ADA5B543DE} = {B2BF2981-E139-41DB-8382-8770EDA1B3ED}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4716092-AF98-4DA1-9107-5266B26AC33B}
+	EndGlobalSection
+EndGlobal

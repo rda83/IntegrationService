@@ -1,2 +1,0 @@
-# IntegrationService
-Demo integration service

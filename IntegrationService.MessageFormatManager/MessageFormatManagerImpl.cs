@@ -40,7 +40,7 @@ namespace IntegrationService.MessageFormatManager
 
         public IEnumerable<MessageFormat> GetMessageFormats(string name, string searchQuery)
         {
-            var messageFormatEntities = _messageFormatRepository.GetMessageFormats(name);
+            var messageFormatEntities = _messageFormatRepository.GetMessageFormats();
 
             var result = _mapper.Map<IEnumerable<MessageFormat>>(messageFormatEntities);
             return result;

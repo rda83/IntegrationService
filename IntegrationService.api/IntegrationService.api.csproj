@@ -21,6 +21,7 @@
     <ProjectReference Include="..\IntegrationService.MessageFormatManager\IntegrationService.MessageFormatManager.csproj" />
     <ProjectReference Include="..\IntegrationService.Model\IntegrationService.Model.csproj" />
     <ProjectReference Include="..\IntegrationService.Operations\IntegrationService.Operations.csproj" />
+    <ProjectReference Include="..\IntegrationService.ResourceParameters\IntegrationService.ResourceParameters.csproj" />
     <ProjectReference Include="..\lib\IntegrationService.DataBase\IntegrationService.Data.csproj" />
   </ItemGroup>
 

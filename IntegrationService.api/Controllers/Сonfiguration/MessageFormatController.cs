@@ -1,5 +1,6 @@
 ﻿using IntegrationService.MessageFormatManager;
 using IntegrationService.Model;
+using IntegrationService.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -53,11 +54,11 @@ namespace IntegrationService.api.Controllers
 
         [HttpGet]
         [HttpHead]
-        public ActionResult<IEnumerable<MessageFormat>> GetMessageFormats([FromQuery]string name, [FromQuery] string searchQuery)
+        public ActionResult<IEnumerable<MessageFormat>> GetMessageFormats([FromQuery] SimpleObjectResourceParameter request)
         {
             //throw new Exception();
-            var result = _manager.GetMessageFormats(name, searchQuery);
-            return Ok(result);
+            //var result = _manager.GetMessageFormats(name, searchQuery);
+            return Ok();
         }
 
         [HttpGet("{Id}")]

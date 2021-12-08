@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IntegrationService.Application\IntegrationService.Application.csproj" />
+    <ProjectReference Include="..\IntegrationService.Infrastructure\IntegrationService.Infrastructure.csproj" />
     <ProjectReference Include="..\IntegrationService.MessageFormatManager\IntegrationService.MessageFormatManager.csproj" />
     <ProjectReference Include="..\IntegrationService.Model\IntegrationService.Model.csproj" />
     <ProjectReference Include="..\IntegrationService.Operations\IntegrationService.Operations.csproj" />

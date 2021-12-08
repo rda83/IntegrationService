@@ -11,6 +11,7 @@ using IntegrationService.Operations;
 using IntegrationService.Data.Services;
 using Microsoft.AspNetCore.Http;
 using IntegrationService.Application;
+using IntegrationService.Infrastructure;
 
 namespace IntegrationService.api
 {
@@ -46,6 +47,7 @@ namespace IntegrationService.api
             services.AddIntegrationServiceOps();
             services.AddRepositories();
             services.AddApplicationLayer();
+            services.AddInfrastructureServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

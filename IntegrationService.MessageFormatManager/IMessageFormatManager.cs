@@ -1,4 +1,5 @@
 ﻿using IntegrationService.Model;
+using IntegrationService.ResourceParameters;
 using System.Collections.Generic;
 
 namespace IntegrationService.MessageFormatManager
@@ -7,6 +8,6 @@ namespace IntegrationService.MessageFormatManager
     {
         public MessageFormat GetMessageFormat(long Id);
         public void AddMessageFormat(MessageFormat messageFormat);
-        public IEnumerable<MessageFormat> GetMessageFormats(string name, string searchQuery);
+        public IEnumerable<MessageFormat> GetMessageFormats(SimpleObjectResourceParameter request);
     }
 }

@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IntegrationService.Model\IntegrationService.Model.csproj" />
+    <ProjectReference Include="..\IntegrationService.PropertyCheckerService\IntegrationService.PropertyCheckerService.csproj" />
+    <ProjectReference Include="..\IntegrationService.PropertyMappingService\IntegrationService.PropertyMappingService.csproj" />
+    <ProjectReference Include="..\IntegrationService.ResourceParameters\IntegrationService.ResourceParameters.csproj" />
     <ProjectReference Include="..\lib\IntegrationService.DataBase\IntegrationService.Data.csproj" />
   </ItemGroup>
 

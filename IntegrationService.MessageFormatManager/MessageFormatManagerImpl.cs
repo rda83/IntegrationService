@@ -3,6 +3,9 @@ using IntegrationService.Model;
 using IntegrationService.Data.Services;
 using System;
 using System.Collections.Generic;
+using IntegrationService.ResourceParameters;
+using IntegrationService.PropertyCheckerService;
+using IntegrationService.PropertyMappingService;
 
 namespace IntegrationService.MessageFormatManager
 {
@@ -10,14 +13,24 @@ namespace IntegrationService.MessageFormatManager
     {
         private readonly IMapper _mapper;
         private IMessageFormatRepository _messageFormatRepository;
+        private IPropertyCheckerService _propertyCheckerService;
+        private IPropertyMappingService _propertyMappingService;
 
         public MessageFormatManagerImpl(IMessageFormatRepository messageFormatRepository,
+            IPropertyCheckerService propertyCheckerService,
+            IPropertyMappingService propertyMappingService,
             IMapper mapper)
         {
             _messageFormatRepository = messageFormatRepository ?? 
                 throw new ArgumentNullException(nameof(messageFormatRepository));
 
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+
+            _propertyCheckerService = propertyCheckerService ??
+                throw new ArgumentNullException(nameof(propertyCheckerService));
+
+            _propertyMappingService = propertyMappingService ??
+                throw new ArgumentNullException(nameof(propertyMappingService));
         }
 
         public MessageFormat GetMessageFormat(long Id)
@@ -38,9 +51,23 @@ namespace IntegrationService.MessageFormatManager
             _messageFormatRepository.Save();
         }
 
-        public IEnumerable<MessageFormat> GetMessageFormats(string name, string searchQuery)
+        public IEnumerable<MessageFormat> GetMessageFormats(SimpleObjectResourceParameter request)
         {
-            var messageFormatEntities = _messageFormatRepository.GetMessageFormats();
+            if (!_propertyMappingService.ValidMappingExistsFor<MessageFormat, Data.Entities.MessageFormat>(
+                request.OrderBy))
+            {
+                //return BadRequest();
+                var i = 0;
+            }
+
+            //Испольшуется для шейпинга данных
+            //if (!_propertyCheckerService.TypeHasProperties<MessageFormat>(
+            //request.Fields))
+            //{
+            //    return BadRequest();
+            //}
+
+            var messageFormatEntities = _messageFormatRepository.GetMessageFormats(request.Name);
 
             var result = _mapper.Map<IEnumerable<MessageFormat>>(messageFormatEntities);
             return result;

@@ -56,9 +56,8 @@ namespace IntegrationService.api.Controllers
         [HttpHead]
         public ActionResult<IEnumerable<MessageFormat>> GetMessageFormats([FromQuery] SimpleObjectResourceParameter request)
         {
-            //throw new Exception();
-            //var result = _manager.GetMessageFormats(name, searchQuery);
-            return Ok();
+            var result = _manager.GetMessageFormats(request);
+            return Ok(result);
         }
 
         [HttpGet("{Id}")]

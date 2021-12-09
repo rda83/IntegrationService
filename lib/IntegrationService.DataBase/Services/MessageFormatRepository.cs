@@ -32,30 +32,20 @@ namespace IntegrationService.Data.Services
             return result;
         }
 
-        public IEnumerable<MessageFormat> GetMessageFormats(string name, string searchQuery)
+        public IEnumerable<MessageFormat> GetMessageFormats(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)
-                && string.IsNullOrWhiteSpace(searchQuery))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 return GetMessageFormats();
             }
 
-            var messageFormats = _context.MessageFormats as IQueryable<MessageFormat>;
+            var messageFormats = _context.MessageFormats.AsQueryable();
 
-            if (string.IsNullOrWhiteSpace(name))
+            if (!string.IsNullOrWhiteSpace(name))
             {
                 name = name.Trim();
-                messageFormats.Where(i => i.Name == name);
+                messageFormats = messageFormats.Where(i => i.Name == name);
             }
-
-            //if (string.IsNullOrWhiteSpace(searchQuery))
-            //{
-            //    searchQuery = searchQuery.Trim();
-            //    messageFormats.Where(i => 
-            //     здесь перечислены (через ИЛИ) все поля модели, на каждом поле вызван метод Contains(searchQuery));
-
-            //    Выглядит сомнительно
-            //}
 
             IEnumerable<MessageFormat> result = messageFormats
                 .ToList<MessageFormat>();

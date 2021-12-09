@@ -11,5 +11,11 @@ namespace IntegrationService.ResourceParameters
         public string Name { get; set; }
 
         #endregion
+
+        /// <summary>
+        /// Поля для сортировки
+        /// Для сортировки по убыванию необходимо использовать ключевое слово DESC
+        /// </summary>
+        public string OrderBy { get; set; } = "Name";
     }
 }

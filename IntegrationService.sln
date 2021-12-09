@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationService.Property
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationService.Infrastructure", "IntegrationService.Infrastructure\IntegrationService.Infrastructure.csproj", "{A364053E-FB10-4EDA-90E9-72234AB628BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationService.PropertyMappingService", "IntegrationService.PropertyMappingService\IntegrationService.PropertyMappingService.csproj", "{D4B6AB5A-E2C9-4441-98CA-15E0B5C37770}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{A364053E-FB10-4EDA-90E9-72234AB628BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A364053E-FB10-4EDA-90E9-72234AB628BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A364053E-FB10-4EDA-90E9-72234AB628BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B6AB5A-E2C9-4441-98CA-15E0B5C37770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B6AB5A-E2C9-4441-98CA-15E0B5C37770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B6AB5A-E2C9-4441-98CA-15E0B5C37770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B6AB5A-E2C9-4441-98CA-15E0B5C37770}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{C19940A4-9A7E-491B-858D-6C4890C669DE} = {6AC9FCB9-E85E-4ED1-917D-2D63F335B2B0}
 		{37834519-E08A-4184-A423-5FDD9B9B9469} = {7C31C965-8181-40EF-9F73-464C35A5EFA5}
 		{A364053E-FB10-4EDA-90E9-72234AB628BD} = {7C31C965-8181-40EF-9F73-464C35A5EFA5}
+		{D4B6AB5A-E2C9-4441-98CA-15E0B5C37770} = {7C31C965-8181-40EF-9F73-464C35A5EFA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4716092-AF98-4DA1-9107-5266B26AC33B}

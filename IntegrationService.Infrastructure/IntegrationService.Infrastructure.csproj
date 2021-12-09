@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IntegrationService.Application\IntegrationService.Application.csproj" />
     <ProjectReference Include="..\IntegrationService.PropertyCheckerService\IntegrationService.PropertyCheckerService.csproj" />
+    <ProjectReference Include="..\IntegrationService.PropertyMappingService\IntegrationService.PropertyMappingService.csproj" />
   </ItemGroup>
 
 </Project>

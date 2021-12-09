@@ -11,7 +11,7 @@ namespace IntegrationService.Data.Services
     {
         public MessageFormat GetMessageFormat(long Id);
         public IEnumerable<MessageFormat> GetMessageFormats();
-        public IEnumerable<MessageFormat> GetMessageFormats(string name, string searchQuery);
+        public IEnumerable<MessageFormat> GetMessageFormats(string name);
         public void AddMessageFormat(MessageFormat messageFormat);
 
         //public void MessageFormatAdd(MessageFormat messageFormat);

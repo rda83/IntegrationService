@@ -13,7 +13,13 @@ namespace IntegrationService.ResourceParameters
         #endregion
 
         #region Pagination
+        public int PageNumber { get; set; } = 1;
 
+        public int PageSize
+        {
+            get => _pageSize;
+            set => _pageSize = (value > DefaultSettings.GetMaxPageSize()) ? DefaultSettings.GetMaxPageSize() : value;
+        }
         #endregion
 
         /// <summary>

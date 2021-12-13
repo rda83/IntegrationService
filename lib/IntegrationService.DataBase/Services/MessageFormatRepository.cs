@@ -1,5 +1,6 @@
 ﻿using IntegrationService.Data.Entities;
 using IntegrationService.Data.Helpers;
+using IntegrationService.Helpers;
 using IntegrationService.PropertyMappingService;
 using System;
 using System.Collections.Generic;
@@ -33,19 +34,22 @@ namespace IntegrationService.Data.Services
             _context.MessageFormats.Add(messageFormat);
         }
 
-        public IEnumerable<MessageFormat> GetMessageFormats()
+        public IEnumerable<MessageFormat> GetMessageFormatsPages(string name, int pageNumber, int pageSize, string orderBy)
         {
-            IEnumerable<MessageFormat> result = _context.MessageFormats.ToList<MessageFormat>();
-            return result;
+            var result = GetMessageFormatsAsQueryable(name, orderBy);
+            return PageList<MessageFormat>.Create(result, pageNumber, pageSize);
         }
 
         public IEnumerable<MessageFormat> GetMessageFormats(string name, string orderBy)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return GetMessageFormats();
-            }
+            var result = GetMessageFormatsAsQueryable(name, orderBy);
+            return result;
+        }
 
+        #region Service
+
+        private IQueryable<MessageFormat> GetMessageFormatsAsQueryable(string name, string orderBy)
+        {
             var messageFormats = _context.MessageFormats.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(name))
@@ -64,10 +68,9 @@ namespace IntegrationService.Data.Services
                 messageFormats = messageFormats.OrderBy(t => t.Name);
             }
 
-            IEnumerable<MessageFormat> result = messageFormats
-                .ToList<MessageFormat>();
-
-            return result;
+            return messageFormats;
         }
+
+        #endregion    
     }
 }

@@ -67,7 +67,7 @@ namespace IntegrationService.MessageFormatManager
             //    return BadRequest();
             //}
 
-            var messageFormatEntities = _messageFormatRepository.GetMessageFormats(request.Name);
+            var messageFormatEntities = _messageFormatRepository.GetMessageFormats(request.Name, request.OrderBy);
 
             var result = _mapper.Map<IEnumerable<MessageFormat>>(messageFormatEntities);
             return result;

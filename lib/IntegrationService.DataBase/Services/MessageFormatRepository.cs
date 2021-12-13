@@ -1,15 +1,22 @@
 ﻿using IntegrationService.Data.Entities;
+using IntegrationService.Data.Helpers;
+using IntegrationService.PropertyMappingService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationService.Data.Services
 {
     public class MessageFormatRepository : CommonRepository, IMessageFormatRepository
     {
-        public MessageFormatRepository(DBContext context):base(context) { }
+        private readonly IPropertyMappingService _propertyMappingService;
+
+        public MessageFormatRepository(DBContext context, 
+            IPropertyMappingService propertyMappingService) :base(context)
+        {
+            _propertyMappingService = propertyMappingService ??
+                            throw new ArgumentNullException(nameof(propertyMappingService));
+        }
 
         public MessageFormat GetMessageFormat(long Id)
         {
@@ -32,7 +39,7 @@ namespace IntegrationService.Data.Services
             return result;
         }
 
-        public IEnumerable<MessageFormat> GetMessageFormats(string name)
+        public IEnumerable<MessageFormat> GetMessageFormats(string name, string orderBy)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -45,6 +52,16 @@ namespace IntegrationService.Data.Services
             {
                 name = name.Trim();
                 messageFormats = messageFormats.Where(i => i.Name == name);
+            }
+
+            if (!string.IsNullOrEmpty(orderBy))
+            {
+                var messageFormatMappingDictionary = _propertyMappingService.GetPropertyMapping<IntegrationService.Model.MessageFormat, MessageFormat>();
+                messageFormats = messageFormats.ApplySort(orderBy, messageFormatMappingDictionary);
+            }
+            else
+            {
+                messageFormats = messageFormats.OrderBy(t => t.Name);
             }
 
             IEnumerable<MessageFormat> result = messageFormats

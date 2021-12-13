@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace IntegrationService.Model
 {
     public class MessageFormat

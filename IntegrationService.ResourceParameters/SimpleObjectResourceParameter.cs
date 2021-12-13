@@ -12,6 +12,10 @@ namespace IntegrationService.ResourceParameters
 
         #endregion
 
+        #region Pagination
+
+        #endregion
+
         /// <summary>
         /// Поля для сортировки
         /// Для сортировки по убыванию необходимо использовать ключевое слово DESC

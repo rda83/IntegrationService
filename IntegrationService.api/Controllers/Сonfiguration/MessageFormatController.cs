@@ -61,7 +61,7 @@ namespace IntegrationService.api.Controllers
         }
 
         [HttpGet("{Id}")]
-        public ActionResult<MessageFormat> GetMessageFormat(long Id)
+        public ActionResult GetMessageFormat(long Id)
         {
             var result = _manager.GetMessageFormat(Id);
 

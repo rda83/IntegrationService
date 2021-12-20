@@ -27,5 +27,11 @@ namespace IntegrationService.ResourceParameters
         /// Для сортировки по убыванию необходимо использовать ключевое слово DESC
         /// </summary>
         public string OrderBy { get; set; } = "Name";
+
+        #region ShapeData
+
+        public string Fields { get; set; }
+        
+        #endregion
     }
 }

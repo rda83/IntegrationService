@@ -8,6 +8,11 @@ namespace IntegrationService.PropertyCheckerService
         {
             bool result = true;
 
+            if (String.IsNullOrEmpty(fieldsNames))
+            {
+                return result;
+            }
+
             var fieldsArray = fieldsNames.Split(',');
 
             foreach (var fieldName in fieldsArray)

@@ -2,12 +2,10 @@
 using IntegrationService.Model;
 using IntegrationService.Data.Services;
 using System;
-using System.Collections.Generic;
 using IntegrationService.ResourceParameters;
 using IntegrationService.PropertyCheckerService;
 using IntegrationService.PropertyMappingService;
 using IntegrationService.Helpers;
-using System.Dynamic;
 
 namespace IntegrationService.MessageFormatManager
 {
@@ -53,30 +51,13 @@ namespace IntegrationService.MessageFormatManager
             _messageFormatRepository.Save();
         }
 
-        public IEnumerable<ExpandoObject> GetMessageFormats(SimpleObjectResourceParameter request)
+        public PageList<Data.Entities.MessageFormat> GetMessageFormats(SimpleObjectResourceParameter request)
         {
-            if (!_propertyMappingService.ValidMappingExistsFor<MessageFormat, Data.Entities.MessageFormat>(
-                request.OrderBy))
-            {
-                //return BadRequest();
-                var i = 0;
-            }
-
-            if (!_propertyCheckerService.TypeHasProperties<MessageFormat>(
-                request.Fields))
-            {
-                var i = 0;
-                //return BadRequest();
-            }
 
             var messageFormatEntities = _messageFormatRepository
                 .GetMessageFormatsPages(request.Name, request.PageNumber, request.PageSize, request.OrderBy);
 
-            var result = _mapper
-                .Map<IEnumerable<MessageFormat>>(messageFormatEntities)
-                .ShapeData(request.Fields);
-
-            return result;
+            return messageFormatEntities;
         }
     }
 }

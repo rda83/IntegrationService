@@ -34,7 +34,7 @@ namespace IntegrationService.Data.Services
             _context.MessageFormats.Add(messageFormat);
         }
 
-        public IEnumerable<MessageFormat> GetMessageFormatsPages(string name, int pageNumber, int pageSize, string orderBy)
+        public PageList<MessageFormat> GetMessageFormatsPages(string name, int pageNumber, int pageSize, string orderBy)
         {
             var result = GetMessageFormatsAsQueryable(name, orderBy);
             return PageList<MessageFormat>.Create(result, pageNumber, pageSize);

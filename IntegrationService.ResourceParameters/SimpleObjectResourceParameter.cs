@@ -31,7 +31,40 @@ namespace IntegrationService.ResourceParameters
         #region ShapeData
 
         public string Fields { get; set; }
-        
+
         #endregion
+
+        public override object GetRouteObject(ResourceUriType uriType)
+        {
+            switch (uriType)
+            {
+                case ResourceUriType.PreviousPage:
+                    return new
+                    {
+                        fields = Fields,
+                        orderBy = OrderBy,
+                        pageNumber = PageNumber - 1,
+                        pageSize = PageSize,
+                        Name
+                    };
+                case ResourceUriType.NextPage:
+                    return new
+                    {
+                        orderBy = OrderBy,
+                        pageNumber = PageNumber - 1,
+                        pageSize = PageSize,
+                        Name
+                    };
+                default:
+                    return new
+                    {
+                        orderBy = OrderBy,
+                        pageNumber = PageNumber,
+                        pageSize = PageSize,
+                        Name
+                    };
+            }
+        }
+
     }
 }

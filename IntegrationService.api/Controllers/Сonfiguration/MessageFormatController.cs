@@ -7,6 +7,7 @@ using IntegrationService.PropertyMappingService;
 using IntegrationService.ResourceParameters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -45,31 +46,10 @@ namespace IntegrationService.api.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        // GET api/configuration/messageFormats
-        // GET api/configuration/messageFormats/{messageFormatId}
-        // GET api/configuration/messageFormats?orderby=name
-
-
-        ///**
-        // GET api/configuration/messageFormats/{messageFormatId}/schemes
-        // GET api/configuration/schemes{schemaId}
-
-        // RPC-style
-        // GET api/configuration/messageFormats/{messageFormatId}/pagetotals
-        // GET api/configuration/messageFormatsPageTotals/{id}
-        // GET api/configuration/messageFormats/{messageFormatId}/totalAmountOfPages
-
 
         ///// <summary>
         ///// 
         ///// </summary>
-        ///// <param name="request">Параметры запроса </param>
-        ///// <returns>Пустой ответ в случае успеха</returns>
-        //[ProducesResponseType(StatusCodes.Status204NoContent)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[Consumes("application/json")]
-        //[HttpPost]
-
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MessageFormat>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet(Name = "GetMessageFormats")]
@@ -120,6 +100,9 @@ namespace IntegrationService.api.Controllers
             return Ok(result);
         }
 
+        ///// <summary>
+        ///// 
+        ///// </summary>
         [HttpGet("{Id}")]
         public ActionResult GetMessageFormat(long Id)
         {
@@ -130,6 +113,19 @@ namespace IntegrationService.api.Controllers
                 return NotFound();
             }
 
+            return Ok(result);
+        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MessageFormat>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPatch("{Id}")]
+        public ActionResult<MessageFormat> PartiallyUpdateMessageFormat(long Id,
+            [FromBody] JsonPatchDocument<MessageFormat> patchDocument)
+        {
+            var result = _manager.UpdateMessageFormat(Id, patchDocument);
             return Ok(result);
         }
     }

@@ -9,13 +9,9 @@ namespace IntegrationService.Data.Services
         public PageList<MessageFormat> GetMessageFormatsPages(string name, int pageNumber, int pageSize, string orderBy);
         public IEnumerable<MessageFormat> GetMessageFormats(string name, string orderBy);
         public MessageFormat GetMessageFormat(long Id);
-
         // bool MessageFormatExist(long Id);
-        //void BatchInsertOrUpdateMessageFormats(List<MessageFormat> MessageFormats); // POST и PUT 
-
+        void UpdateMessageFormat(MessageFormat messageFormat);
         public void AddMessageFormat(MessageFormat messageFormat);
-
-        
 
         public void BeginTransaction();
         public void CommitTransaction();

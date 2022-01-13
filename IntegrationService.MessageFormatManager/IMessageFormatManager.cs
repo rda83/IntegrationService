@@ -1,6 +1,7 @@
 ﻿using IntegrationService.Helpers;
 using IntegrationService.Model;
 using IntegrationService.ResourceParameters;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace IntegrationService.MessageFormatManager
 {
@@ -9,5 +10,6 @@ namespace IntegrationService.MessageFormatManager
         public MessageFormat GetMessageFormat(long Id);
         public void AddMessageFormat(MessageFormat messageFormat);
         public PageList<Data.Entities.MessageFormat> GetMessageFormats(SimpleObjectResourceParameter request);
+        public MessageFormat UpdateMessageFormat(long Id, JsonPatchDocument<MessageFormat> patchDocument);
     }
 }

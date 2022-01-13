@@ -6,6 +6,7 @@ using IntegrationService.ResourceParameters;
 using IntegrationService.PropertyCheckerService;
 using IntegrationService.PropertyMappingService;
 using IntegrationService.Helpers;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace IntegrationService.MessageFormatManager
 {
@@ -58,6 +59,38 @@ namespace IntegrationService.MessageFormatManager
                 .GetMessageFormatsPages(request.Name, request.PageNumber, request.PageSize, request.OrderBy);
 
             return messageFormatEntities;
+        }
+
+        public MessageFormat UpdateMessageFormat(long Id, JsonPatchDocument<MessageFormat> patchDocument)
+        {
+            MessageFormat messageFormat;
+
+            IntegrationService.Data.Entities.MessageFormat messageFormatEntity =
+                _messageFormatRepository.GetMessageFormat(Id);         
+
+            if (messageFormatEntity == null)
+            {
+                messageFormat = new MessageFormat();
+
+                patchDocument.ApplyTo(messageFormat);
+
+                messageFormatEntity = _mapper.Map<IntegrationService.Data.Entities.MessageFormat>(messageFormat);
+                _messageFormatRepository.AddMessageFormat(messageFormatEntity);
+            }
+            else
+            {
+                messageFormat = _mapper.Map<MessageFormat>(messageFormatEntity);
+
+                patchDocument.ApplyTo(messageFormat);
+
+                _mapper.Map(messageFormat, messageFormatEntity);
+                _messageFormatRepository.UpdateMessageFormat(messageFormatEntity);
+            }
+
+            _messageFormatRepository.Save();
+            _mapper.Map(messageFormatEntity, messageFormat); //??
+
+            return messageFormat;
         }
     }
 }

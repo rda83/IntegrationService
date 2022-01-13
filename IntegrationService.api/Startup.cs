@@ -12,6 +12,7 @@ using IntegrationService.Data.Services;
 using Microsoft.AspNetCore.Http;
 using IntegrationService.Application;
 using IntegrationService.Infrastructure;
+using Newtonsoft.Json.Serialization;
 
 namespace IntegrationService.api
 {
@@ -36,6 +37,10 @@ namespace IntegrationService.api
             services.AddControllers(setupAction => 
             {
                 setupAction.ReturnHttpNotAcceptable = true;
+            }).AddNewtonsoftJson(setupAction =>
+            {
+                setupAction.SerializerSettings.ContractResolver =
+                   new CamelCasePropertyNamesContractResolver();
             }).AddXmlDataContractSerializerFormatters();
 
 

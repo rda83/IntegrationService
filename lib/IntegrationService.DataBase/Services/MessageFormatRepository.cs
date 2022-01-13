@@ -25,15 +25,6 @@ namespace IntegrationService.Data.Services
             return result;
         }
 
-        public void AddMessageFormat(MessageFormat messageFormat)
-        {
-            if (messageFormat == null)
-            {
-                throw new ArgumentNullException(nameof(messageFormat));
-            }
-            _context.MessageFormats.Add(messageFormat);
-        }
-
         public PageList<MessageFormat> GetMessageFormatsPages(string name, int pageNumber, int pageSize, string orderBy)
         {
             var result = GetMessageFormatsAsQueryable(name, orderBy);
@@ -44,6 +35,24 @@ namespace IntegrationService.Data.Services
         {
             var result = GetMessageFormatsAsQueryable(name, orderBy);
             return result;
+        }
+
+        public void UpdateMessageFormat(MessageFormat messageFormat)
+        {
+            if (messageFormat == null)
+            {
+                throw new ArgumentNullException(nameof(messageFormat));
+            }
+            _context.MessageFormats.Update(messageFormat);
+        }
+
+        public void AddMessageFormat(MessageFormat messageFormat)
+        {
+            if (messageFormat == null)
+            {
+                throw new ArgumentNullException(nameof(messageFormat));
+            }
+            _context.MessageFormats.Add(messageFormat);
         }
 
         #region Service
@@ -71,6 +80,6 @@ namespace IntegrationService.Data.Services
             return messageFormats;
         }
 
-        #endregion    
+        #endregion
     }
 }

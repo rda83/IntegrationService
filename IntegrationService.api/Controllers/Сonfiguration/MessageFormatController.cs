@@ -128,5 +128,17 @@ namespace IntegrationService.api.Controllers
             var result = _manager.UpdateMessageFormat(Id, patchDocument);
             return Ok(result);
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("{Id}")]
+        public ActionResult<MessageFormat> UpdateMessageFormat(long Id, [FromBody] MessageFormat messageFormat)
+        {
+            _manager.UpdateMessageFormat(Id, messageFormat);
+            return NoContent();
+        }
     }
 }

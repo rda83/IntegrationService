@@ -92,5 +92,15 @@ namespace IntegrationService.MessageFormatManager
 
             return messageFormat;
         }
+
+        public void UpdateMessageFormat(long Id, MessageFormat messageFormat)
+        {
+            var messageFormatEntity = _mapper.Map<IntegrationService.Data.Entities.MessageFormat>(messageFormat);
+            messageFormatEntity.Id = Id;
+
+            _messageFormatRepository.UpdateMessageFormat(messageFormatEntity);
+            _messageFormatRepository.Save();
+
+        }
     }
 }

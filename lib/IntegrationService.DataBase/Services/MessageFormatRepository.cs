@@ -55,6 +55,15 @@ namespace IntegrationService.Data.Services
             _context.MessageFormats.Add(messageFormat);
         }
 
+        public void DeleteMessageFormat(long Id)
+        {
+            MessageFormat messageFormat = _context.MessageFormats.FirstOrDefault(i => i.Id == Id);
+            if (messageFormat != null)
+            {
+                _context.MessageFormats.Remove(messageFormat);
+            }
+        }
+
         #region Service
 
         private IQueryable<MessageFormat> GetMessageFormatsAsQueryable(string name, string orderBy)

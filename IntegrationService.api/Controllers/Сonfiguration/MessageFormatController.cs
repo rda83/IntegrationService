@@ -152,5 +152,17 @@ namespace IntegrationService.api.Controllers
             _manager.AddMessageFormat(messageFormat);
             return NoContent();
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpDelete("{Id}")]
+        public ActionResult<MessageFormat> DeleteMessageFormat(long Id)
+        {
+            _manager.DeleteMessageFormat(Id);
+            return NoContent();
+        }
     }
 }

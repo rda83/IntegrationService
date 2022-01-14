@@ -12,5 +12,6 @@ namespace IntegrationService.MessageFormatManager
         public PageList<Data.Entities.MessageFormat> GetMessageFormats(SimpleObjectResourceParameter request);
         public MessageFormat UpdateMessageFormat(long Id, JsonPatchDocument<MessageFormat> patchDocument);
         public void UpdateMessageFormat(long Id, MessageFormat messageFormat);
+        public void DeleteMessageFormat(long Id);
     }
 }

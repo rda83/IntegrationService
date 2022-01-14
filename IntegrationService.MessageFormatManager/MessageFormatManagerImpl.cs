@@ -102,5 +102,11 @@ namespace IntegrationService.MessageFormatManager
             _messageFormatRepository.Save();
 
         }
+
+        public void DeleteMessageFormat(long Id)
+        {
+            _messageFormatRepository.DeleteMessageFormat(Id);
+            _messageFormatRepository.Save();
+        }
     }
 }

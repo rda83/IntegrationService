@@ -140,5 +140,17 @@ namespace IntegrationService.api.Controllers
             _manager.UpdateMessageFormat(Id, messageFormat);
             return NoContent();
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost]
+        public ActionResult CreateMessageFormat(MessageFormat messageFormat)
+        {
+            _manager.AddMessageFormat(messageFormat);
+            return NoContent();
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace IntegrationService.Application.PropertyMapping
                 {
                                 { "Id", new PropertyMappingValue(new List<string>() { "Id" })},
                                 { "Name", new PropertyMappingValue(new List<string>() { "Name" })},
+                                { "FormatType", new PropertyMappingValue(new List<string>() { "FormatType" })},
                 };
             _propertyMappings.Add(new PropertyMapping<MessageFormat, Data.Entities.MessageFormat>(messageFormatsPropertyMapping));
 

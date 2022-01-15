@@ -1,6 +1,5 @@
 ﻿using IntegrationService.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace IntegrationService.Data

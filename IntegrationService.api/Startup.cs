@@ -34,14 +34,14 @@ namespace IntegrationService.api
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddControllers(setupAction => 
+            services.AddControllers(setupAction =>
             {
                 setupAction.ReturnHttpNotAcceptable = true;
             }).AddNewtonsoftJson(setupAction =>
             {
                 setupAction.SerializerSettings.ContractResolver =
                    new CamelCasePropertyNamesContractResolver();
-            }).AddXmlDataContractSerializerFormatters();
+            });
 
 
             services.AddSwaggerGen(c =>

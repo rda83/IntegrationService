@@ -12,6 +12,7 @@
     <ProjectReference Include="..\IntegrationService.Application\IntegrationService.Application.csproj" />
     <ProjectReference Include="..\IntegrationService.PropertyCheckerService\IntegrationService.PropertyCheckerService.csproj" />
     <ProjectReference Include="..\IntegrationService.PropertyMappingService\IntegrationService.PropertyMappingService.csproj" />
+    <ProjectReference Include="..\lib\DataValidatorService\IntegrationService.DataValidatorService.csproj" />
   </ItemGroup>
 
 </Project>

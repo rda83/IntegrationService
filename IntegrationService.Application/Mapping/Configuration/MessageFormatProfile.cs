@@ -3,7 +3,7 @@ using IntegrationService.Model;
 
 namespace IntegrationService.Application.Mapping.Configuration
 {
-    class MessageFormatProfile : Profile
+    public class MessageFormatProfile : Profile
     {
         public MessageFormatProfile()
         {

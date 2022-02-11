@@ -34,37 +34,34 @@ namespace IntegrationService.ResourceParameters
 
         #endregion
 
-        public override object GetRouteObject(ResourceUriType uriType)
+        public override RouteObject GetRouteObject(ResourceUriType uriType)
         {
             switch (uriType)
             {
                 case ResourceUriType.PreviousPage:
-                    return new
+                    return new RouteObject()
                     {
-                        fields = Fields,
-                        orderBy = OrderBy,
-                        pageNumber = PageNumber - 1,
-                        pageSize = PageSize,
-                        Name
+                        Fields = Fields,
+                        OrderBy = OrderBy,
+                        PageNumber = PageNumber - 1,
+                        PageSize = PageSize
                     };
                 case ResourceUriType.NextPage:
-                    return new
+                    return new RouteObject()
                     {
-                        orderBy = OrderBy,
-                        pageNumber = PageNumber - 1,
-                        pageSize = PageSize,
-                        Name
+                        Fields = Fields,
+                        OrderBy = OrderBy,
+                        PageNumber = PageNumber + 1,
+                        PageSize = PageSize,
                     };
                 default:
-                    return new
+                    return new RouteObject()
                     {
-                        orderBy = OrderBy,
-                        pageNumber = PageNumber,
-                        pageSize = PageSize,
-                        Name
+                        OrderBy = OrderBy,
+                        PageNumber = PageNumber,
+                        PageSize = PageSize,
                     };
             }
         }
-
     }
 }

@@ -5,9 +5,9 @@ namespace IntegrationService.ResourceParameters
     {
         protected int _pageSize = DefaultSettings.GetDefaultPageSize();
 
-        public virtual object GetRouteObject(ResourceUriType uriType)
+        public virtual RouteObject GetRouteObject(ResourceUriType uriType)
         {
-            return new { };
+            return new RouteObject();
         }
     }
 }
